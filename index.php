@@ -49,6 +49,11 @@ function drawLife($dim){
     <link href="assets/css/main.css" type="text/css" rel="stylesheet" />
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <div class="row-fluid">
+      <div id="header" class="offset1 span10">
+        <h1 class="grey_text" >Game of Life | Tanay Manohar Kapoor</h1>
+      </div>
+    </div>
     <div id="content" class="row-fluid">
       <div id="gameContainer"class="offset1 span5 center_content">
         <?php drawLife($dim); ?>
@@ -59,7 +64,15 @@ function drawLife($dim){
           <button id="stopGame" class="btn btn-danger btn-large">Stop</button>
         </div>
         <div class="bottom_margin">
-          <p id="notifications"></p>
+          <h4 id="notifications" class="box_it"></h4>
+        </div>
+        <div class="bottom_margin box_it">
+          <h3>Rules of the game</h3>
+          <ol>
+            <li>Any live cell with 1 or less neighbors will die due to loneliness.</li>
+            <li>Any live cell with 4 or more neighbors will die due to overcrowding.</li>
+            <li>Any dead cell will become alive if it has 3 neighbors nuturing it.</li>
+          </ol>
         </div>
       </div>
     </div>

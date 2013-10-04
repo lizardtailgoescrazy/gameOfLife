@@ -36,8 +36,12 @@ table{
 	background: #282828;
 }
 
-#notifications{
+.box_it{
 	padding: 1em;
 	background: #b0b0b0;
 	border-radius: 0.5em;
+}
+
+.grey_text{
+	color: #b0b0b0;
 }
