@@ -4,6 +4,33 @@ body{
 
 table{
 	margin: auto;
+		-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+}
+
+table tbody{
+		-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+}
+
+table tr{
+		-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
 }
 
 .center_content{
@@ -15,10 +42,9 @@ table{
 }
 
 .gameBit{
-	width: 0.5em;
-	height: 0.5em;
 	border: solid 2px #b0b0b0;
 	cursor: pointer;
+	background: #282828;
 	-webkit-user-select: none; /* Chrome/Safari */        
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+ */
@@ -30,10 +56,6 @@ table{
 
 .bitOn{
 	background: white;
-}
-
-.bitOff{
-	background: #282828;
 }
 
 .box_it{

@@ -1,23 +1,30 @@
 function createArray(length) {
-    var arr = new Array(length || 0), i = length;
+	var arr = new Array(length || 0), i = length;
 
-    if (arguments.length > 1) {
-        var args = Array.prototype.slice.call(arguments, 1);
-        while(i--) arr[length-1 - i] = createArray.apply(this, args);
-    }
-    return arr;
+	if (arguments.length > 1) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		while(i--) arr[length-1 - i] = createArray.apply(this, args);
+	}
+	return arr;
+}
+
+function setBitDim(){
+	var w = $("#gameContainer").width();
+	var size = Math.floor((w/(1.2*dim)))+"px";
+	$(".gameBit").width(size);
+	$(".gameBit").height(size);
 }
 
 function makeID(x, y){
   var id = "";
 
   if(x < 10){
-    id = id+"0";
+	id = id+"0";
   }
   id = id+x;
 
   if(y < 10){
-    id = id+"0";
+	id = id+"0";
   }
   id = id+y;
 
@@ -86,11 +93,10 @@ $( document ).ready(function() {
 		}
 	}
 
+	var mouseMode = null;
+
 	$(".gameBit").click(function(){
 		if(task == null){
-			$(this).toggleClass("bitOff");
-			$(this).toggleClass("bitOn");
-
 			var w_id = $(this).attr("id");
 			var id = parseInt(w_id);
 
@@ -98,13 +104,30 @@ $( document ).ready(function() {
 			var y = id%100;
 
 			if(typeof gameStats[x][y] == 'undefined' || gameStats[x][y] == 0){
+				mouseMode = 1;
+				$(this).addClass("bitOn");
 				gameStats[x][y] = 1;
 				onBits.push(w_id);
 			}
 			else{
+				mouseMode = 0;
+				$(this).removeClass("bitOn");
 				gameStats[x][y] = 0;
 				removeFromArray(onBits, w_id);
 			}
+			console.log("Mouse mode set to: "+mouseMode);
+		}
+	});
+
+	$("#clearGame").click(function(){
+		if(task == null){
+			$(".gameBit").removeClass("bitOn");
+			onBits.length = 0;
+			toTurnOn.length = 0;
+			toTurnOff.length = 0;
+		}
+		else{
+			notify("Stop game before clearing...!");
 		}
 	});
 
@@ -164,7 +187,6 @@ $( document ).ready(function() {
 								//Make alive
 								var id = makeID(i,j);
 								toTurnOn.push(id);
-								//$("#"+id).toggleClass("bitOff");
 								//$("#"+id).toggleClass("bitOn");
 								//gameStats[i][j] = 1;
 							}
@@ -177,7 +199,6 @@ $( document ).ready(function() {
 								if(gameStats[i][j] == 1){
 									var id = makeID(i,j);
 									toTurnOff.push(id);
-									//$("#"+id).toggleClass("bitOff");
 									//$("#"+id).toggleClass("bitOn");
 
 									//gameStats[i][j] = 0;
@@ -190,8 +211,7 @@ $( document ).ready(function() {
 					//turnOn
 				for (var i = 0; i < toTurnOn.length; i++) {
 					var id = parseInt(toTurnOn[i]);
-					$("#"+toTurnOn[i]).toggleClass("bitOff");
-					$("#"+toTurnOn[i]).toggleClass("bitOn");
+					$("#"+toTurnOn[i]).addClass("bitOn");
 					var x = Math.round(id/100);
 					var y = id%100;
 					gameStats[x][y] = 1;
@@ -201,8 +221,7 @@ $( document ).ready(function() {
 				//turnOff
 				for (var i = 0; i < toTurnOff.length; i++) {
 					var id = parseInt(toTurnOff[i]);
-					$("#"+toTurnOff[i]).toggleClass("bitOff");
-					$("#"+toTurnOff[i]).toggleClass("bitOn");
+					$("#"+toTurnOff[i]).removeClass("bitOn");
 					var x = Math.round(id/100);
 					var y = id%100;
 					gameStats[x][y] = 0;
@@ -223,5 +242,10 @@ $( document ).ready(function() {
 	});
 
 	notify("Ready...!");
+	setBitDim();
+
+	$( window ).resize(function() {
+		setBitDim();
+	});
 
 });

@@ -1,4 +1,5 @@
 <?php
+//Defines board size
 $dim = 50;
 
 function makeID($x, $y){
@@ -62,6 +63,7 @@ function drawLife($dim){
         <div class="bottom_margin">
           <button id="startGame" class="btn btn-success btn-large">Start</button>
           <button id="stopGame" class="btn btn-danger btn-large">Stop</button>
+          <button id="clearGame" class="btn btn-primary btn-large">Clear</button>
         </div>
         <div class="bottom_margin">
           <h4 id="notifications" class="box_it"></h4>
