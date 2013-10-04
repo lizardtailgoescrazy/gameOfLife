@@ -1,0 +1,43 @@
+body{
+	background: url(../img/noisy_net.png);
+}
+
+table{
+	margin: auto;
+}
+
+.center_content{
+	text-align: center;
+}
+
+.bottom_margin{
+	margin-bottom: 2em;
+}
+
+.gameBit{
+	width: 0.5em;
+	height: 0.5em;
+	border: solid 2px #b0b0b0;
+	cursor: pointer;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+}
+
+.bitOn{
+	background: white;
+}
+
+.bitOff{
+	background: #282828;
+}
+
+#notifications{
+	padding: 1em;
+	background: #b0b0b0;
+	border-radius: 0.5em;
+}
