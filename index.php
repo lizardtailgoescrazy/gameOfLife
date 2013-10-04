@@ -76,6 +76,9 @@ function drawLife($dim){
             <li>Any dead cell will become alive if it has 3 neighbors nuturing it.</li>
           </ol>
         </div>
+        <div class="bottom_margin box_it">
+          <h4 id="cycleCount"></h4>
+        </div>
       </div>
     </div>
 

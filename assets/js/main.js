@@ -8,33 +8,6 @@ function createArray(length) {
 	return arr;
 }
 
-function setBitDim(){
-	var w = $("#gameContainer").width();
-	var size = Math.floor((w/(1.2*dim)))+"px";
-	$(".gameBit").width(size);
-	$(".gameBit").height(size);
-}
-
-function makeID(x, y){
-  var id = "";
-
-  if(x < 10){
-	id = id+"0";
-  }
-  id = id+x;
-
-  if(y < 10){
-	id = id+"0";
-  }
-  id = id+y;
-
-  return id;
-}
-
-function notify(msg){
-	$("#notifications").text(msg);
-}
-
 function findSurr(arr, x, y, maxLen){
 	count = 0;
 	var set = [
@@ -66,25 +39,31 @@ function findSurr(arr, x, y, maxLen){
 	return count;
 }
 
-function removeFromArray(arr, element){
-	for(var i=0 ; i<arr.length ; i++){
-		if(arr[i] == element){
-			arr.splice(i,1);
-			break;
-		}
-	}
-}
-
 $( document ).ready(function() {
 
+	/*Global vars within document ready*/
 	var gameStats = createArray(dim, dim);
-
 	var toTurnOn = [];
 	var toTurnOff = [];
-
 	var onBits = [];
-
 	var task = null;
+	var cycleCount = 0;
+	var mouseMode = null;
+
+
+	/*Fucntions within ready*/
+	function removeFromArray(arr, element){
+		for(var i=0 ; i<arr.length ; i++){
+			if(arr[i] == element){
+				arr.splice(i,1);
+				break;
+			}
+		}
+	}
+
+	function setCycleCount(){
+		$("#cycleCount").text("Cycle count: "+cycleCount);
+	}
 
 	function stopGame(){
 		if(task !=null){
@@ -93,7 +72,33 @@ $( document ).ready(function() {
 		}
 	}
 
-	var mouseMode = null;
+	function setBitDim(){
+		var w = $("#gameContainer").width();
+		var size = Math.floor((w/(1.2*dim)))+"px";
+		$(".gameBit").width(size);
+		$(".gameBit").height(size);
+	}
+
+
+	function makeID(x, y){
+	  var id = "";
+
+	  if(x < 10){
+		id = id+"0";
+	  }
+	  id = id+x;
+
+	  if(y < 10){
+		id = id+"0";
+	  }
+	  id = id+y;
+
+	  return id;
+	}
+
+	function notify(msg){
+		$("#notifications").text(msg);
+	}
 
 	$(".gameBit").click(function(){
 		if(task == null){
@@ -125,6 +130,8 @@ $( document ).ready(function() {
 			onBits.length = 0;
 			toTurnOn.length = 0;
 			toTurnOff.length = 0;
+			cycleCount = 0;
+			setCycleCount();
 		}
 		else{
 			notify("Stop game before clearing...!");
@@ -147,6 +154,9 @@ $( document ).ready(function() {
 			}
 			
 			notify("Game started...!");
+			cycleCount = 0;
+			setCycleCount();
+
 			task = setInterval(function(){
 				var x_min = dim;
 				var y_min = dim;
@@ -237,11 +247,14 @@ $( document ).ready(function() {
 
 				toTurnOn.length = 0;
 				toTurnOff.length = 0;
+				cycleCount++;
+				setCycleCount();
 			},250);
 		}
 	});
 
 	notify("Ready...!");
+	setCycleCount();
 	setBitDim();
 
 	$( window ).resize(function() {
