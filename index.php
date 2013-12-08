@@ -43,7 +43,7 @@ function drawLife($dim){
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Game of Life | Tanay Manohar Kapoor</title>
+    <title>Game of Life | tmk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Game of life">
     <meta name="author" content="Tanay Manohar Kapoor">
